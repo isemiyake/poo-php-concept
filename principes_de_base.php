@@ -5,6 +5,14 @@ class Etudiant {
     private $nom;
     private static $nombreObjetCreer=0;
     const Ecole = "iepscf fleron";
+    public function __construct()
+    {
+      SELF::$nombreObjetCreer++ ; 
+  }
+   public function __destruct()
+    {
+      SELF::$nombreObjetCreer-- ; 
+  }
     //getters
     public function getPrenom(){
         return $this->prenom;
@@ -33,7 +41,13 @@ class Etudiant {
 
 $etudiant1 =new Etudiant();
 $etudiant1->setPrenom("Pascale");
+
+$etudiant2 =new Etudiant();
+$etudiant2->setPrenom("semih");
 echo Etudiant::Ecole;
 echo "<br/>";
+echo Etudiant::getNombreObjetCreer();
+echo "<br/>";
+unset($etudiant2);
 echo Etudiant::getNombreObjetCreer();
 
