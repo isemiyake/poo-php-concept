@@ -3,7 +3,7 @@
 class Etudiant {
     private $prenom;
     private $nom;
-
+    const Ecole = "iepscf fleron";
     //getters
     public function getPrenom(){
         return $this->prenom;
@@ -28,4 +28,5 @@ class Etudiant {
 
 $etudiant1 =new Etudiant();
 $etudiant1->setPrenom("Pascale");
-echo $etudiant1->getPrenom();
+echo Etudiant::Ecole;
+
