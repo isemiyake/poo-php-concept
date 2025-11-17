@@ -1,14 +1,27 @@
 <?php
-class Etudiant {
+class Etudiant extends ClasseGenerique{
     // Les valeurs d'un objet de la class Etudiant
     private $prenom;
     private $nom;
+    const ECOLE="Iescf Fleron";
+    private static $nombreObjetCreer=0;
     //getters des objets
     public function getPrenom(){
         return $this->prenom;
     }
      public function getNom(){
         return $this->nom;
+    }
+    //constructeur
+    public function __construct(?array $data = null)
+    {
+        parent::__construct($data);
+        SELF::$nombreObjetCreer++;
+    }
+    public function __desctruct(?array $data = null)
+    {
+        //parent::__desctruct($data);
+        SELF::$nombreObjetCreer--;
     }
      //setters des objets
      public function setPrenom(string $data=null){
@@ -22,34 +35,10 @@ class Etudiant {
             endif;
     }
     // Les valeurs de la class Etudiant
-    private static $nombreObjetCreer=0;
-    const Ecole = "iepscf fleron";
-
-    public function __construct(array $data=null)
-    {
-      SELF::$nombreObjetCreer++ ;
-      if($data): 
-      $this->hydrater($data);
-      endif;
-  }
-   public function __destruct()
-    {
-      SELF::$nombreObjetCreer-- ; 
-  }
-    
      public static function getNombreObjetCreer(){
         return SELF::$nombreObjetCreer;
 
     }
     //methode hydrater
-    public function hydrater(array $data = null){
-        if($data):
-            foreach($data as $prop=>$valeur):
-                $nomMethode='set'.ucfirst($prop);
-                if(method_exists($this, $nomMethode)):
-                    $this->$nomMethode($valeur);
-             endif;
-            endforeach;
-        endif;
-    }
+   
 }
