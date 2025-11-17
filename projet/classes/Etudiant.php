@@ -25,9 +25,12 @@ class Etudiant {
     private static $nombreObjetCreer=0;
     const Ecole = "iepscf fleron";
 
-    public function __construct()
+    public function __construct(array $data=null)
     {
-      SELF::$nombreObjetCreer++ ; 
+      SELF::$nombreObjetCreer++ ;
+      if($data): 
+      $this->hydrater($data);
+      endif;
   }
    public function __destruct()
     {
@@ -38,5 +41,15 @@ class Etudiant {
         return SELF::$nombreObjetCreer;
 
     }
-    
+    //methode hydrater
+    public function hydrater(array $data = null){
+        if($data):
+            foreach($data as $prop=>$valeur):
+                $nomMethode='set'.ucfirst($prop);
+                if(method_exists($this, $nomMethode)):
+                    $this->$nomMethode($valeur);
+             endif;
+            endforeach;
+        endif;
+    }
 }
